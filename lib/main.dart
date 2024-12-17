@@ -41,11 +41,12 @@ class _StremHomePageState extends State<StreamHomePage> {
   }
 
   void changeColor() async {
-    await for (var eventColor in colorStream.getColors()) {
+    //await for (var eventColor in colorStream.getColors()) {
+    colorStream.getColors().listen((eventColor) {//menggunakan await for diprosesnya 1/1 jadi sistemnya menunggu 1 1, kalau menggunakan listen setiap event yang diterima mereka dipanggil setiap kali stream mengirimkan event.
       setState(() {
         bgColor = eventColor;
       });
-    }
+    });
   }
 
   @override
