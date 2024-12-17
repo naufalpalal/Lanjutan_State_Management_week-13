@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'stream.dart';
+import 'dart:async';
+import 'dart:math';
 
 void main() {
   runApp(const MyApp());
@@ -33,11 +35,36 @@ class _StremHomePageState extends State<StreamHomePage> {
   Color bgColor = Colors.blueGrey;
   late ColorStream colorStream;
 
+  int lastNumber = 0;
+  late StreamController numberStreamController;
+  late NumberStream numberStream;
+
   @override
   void initState() {
+    numberStream = NumberStream();
+    numberStreamController = numberStream.controller;
+    Stream stream = numberStreamController.stream;
+    stream.listen((event) {
+      setState(() {
+        lastNumber = event;
+      });
+    });//Mengakses stream dari NumberStream yang kemudian setiap kali angka beru ditambahkan ke stream maka angka itu akan diterima dan disimpan dalam variabel lastNumber yang akan digunakan untuk memperbarui tampilannya.
     super.initState();
-    colorStream = ColorStream();
-    changeColor();
+    //colorStream = ColorStream();
+    //changeColor();
+
+    @override
+    void dispose() {
+      numberStreamController.close();
+      super.dispose();
+    }
+  }
+
+  //Menghasilkan angka acak dan menambahkannya ke dalam stream menggunakan addNumberToSink(), dan angka tersebut kemudian dapat diterima dan diperoses di bagian lain program
+  void addRandomNumber() {
+    Random random = Random();
+    int myNum = random.nextInt(10);
+    numberStream.addNumberToSink(myNum);
   }
 
   void changeColor() async {
@@ -55,8 +82,22 @@ class _StremHomePageState extends State<StreamHomePage> {
       appBar: AppBar(
         title: const Text('Stream'),
       ),
-      body: Container(
+      /*body: Container(
         decoration: BoxDecoration(color: bgColor),
+      ),*/
+      body: SizedBox(
+        width: double.infinity,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(lastNumber.toString()),
+            ElevatedButton(
+              onPressed: () => addRandomNumber(),
+              child: Text('New Random Number'),
+            )
+          ],
+        ),
       ),
     );
   }

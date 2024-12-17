@@ -3,6 +3,9 @@
 # Capture Hasil Praktikum Pertama
 ![Praktikum merubah warna bg](Video-1.gif)
 
+# Capture Hasil Praktikum Kedua (Membuat Nomor Random)
+![Praktikum membuat angka random](Video-2.gif)
+
 A new Flutter project.
 
 ## Getting Started
