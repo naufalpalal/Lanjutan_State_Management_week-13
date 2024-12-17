@@ -1,5 +1,8 @@
 # stream_naufal
 
+# Capture Hasil Praktikum Pertama
+![Praktikum merubah warna bg](Video-1.gif)
+
 A new Flutter project.
 
 ## Getting Started
