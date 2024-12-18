@@ -6,6 +6,10 @@
 # Capture Hasil Praktikum Kedua (Membuat Nomor Random)
 ![Praktikum membuat angka random](Video-2.gif)
 
+# Capture Hasil Praktikum Ketiga (Memunculkan nomor 0 - 90)
+![Praktikum membuat angka random dari 0 - 90](Video-3.gif)
+
+
 A new Flutter project.
 
 ## Getting Started

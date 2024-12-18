@@ -38,13 +38,25 @@ class _StremHomePageState extends State<StreamHomePage> {
   int lastNumber = 0;
   late StreamController numberStreamController;
   late NumberStream numberStream;
+  late StreamTransformer transformer;//digunakan untuk mendeklarasikan variabel yang akan diinisialisasi sebelum digunakan.
 
   @override
   void initState() {
     numberStream = NumberStream();
     numberStreamController = numberStream.controller;
     Stream stream = numberStreamController.stream;
-    stream.listen((event) {
+
+    //Kode ini berguna untuk membuat transformasi custom untuk stream yang menunjukkan bahwa stream inputnya bertipe int dan hasilnya juga bertipe int.
+    transformer = StreamTransformer<int, int>.fromHandlers(
+      handleData: (value, sink) {
+        sink.add(value * 10);
+      },
+      handleError: (error, trace, sink) {
+        sink.add(-1);
+      },
+      handleDone: (sink) => sink.close());
+
+    stream.transform(transformer).listen((event) {//transform(transformer) digunakan untuk menghubungkan StreamTransformer ke sebuah stream.
       setState(() {
         lastNumber = event;
       });
@@ -67,9 +79,9 @@ class _StremHomePageState extends State<StreamHomePage> {
   //Menghasilkan angka acak dan menambahkannya ke dalam stream menggunakan addNumberToSink(), dan angka tersebut kemudian dapat diterima dan diperoses di bagian lain program
   void addRandomNumber() {
     Random random = Random();
-    //int myNum = random.nextInt(10);
-    //numberStream.addNumberToSink(myNum);
-    numberStream.addError();//baris ini memanggil method addError dari NumberStream yang sudah didefinisikan di file stream.dart
+    int myNum = random.nextInt(10);
+    numberStream.addNumberToSink(myNum);
+    //numberStream.addError();//baris ini memanggil method addError dari NumberStream yang sudah didefinisikan di file stream.dart
   }
 
   void changeColor() async {
