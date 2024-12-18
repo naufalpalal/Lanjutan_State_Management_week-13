@@ -48,6 +48,10 @@ class _StremHomePageState extends State<StreamHomePage> {
       setState(() {
         lastNumber = event;
       });
+    }).onError((error) {
+      setState(() {
+        lastNumber = -1;
+      });//Dalam kode tersebut jika stream terjadi error akan memunculkan nilai -1 sebagai pemberitahuan bahwa ada error
     });//Mengakses stream dari NumberStream yang kemudian setiap kali angka beru ditambahkan ke stream maka angka itu akan diterima dan disimpan dalam variabel lastNumber yang akan digunakan untuk memperbarui tampilannya.
     super.initState();
     //colorStream = ColorStream();
@@ -63,8 +67,9 @@ class _StremHomePageState extends State<StreamHomePage> {
   //Menghasilkan angka acak dan menambahkannya ke dalam stream menggunakan addNumberToSink(), dan angka tersebut kemudian dapat diterima dan diperoses di bagian lain program
   void addRandomNumber() {
     Random random = Random();
-    int myNum = random.nextInt(10);
-    numberStream.addNumberToSink(myNum);
+    //int myNum = random.nextInt(10);
+    //numberStream.addNumberToSink(myNum);
+    numberStream.addError();//baris ini memanggil method addError dari NumberStream yang sudah didefinisikan di file stream.dart
   }
 
   void changeColor() async {

@@ -30,8 +30,13 @@ class NumberStream {
 
   void addNumberToSink(int newNumber) {
   controller.sink.add(newNumber);
-  close() {
-    controller.close();
+    close() {
+      controller.close();
+    }
   }
+
+  //Metode yang digunakan untuk menambahkan pesan error kw stream yang menggunakan StreamController.
+  addError() {
+    controller.sink.addError('error');
   }
 }
