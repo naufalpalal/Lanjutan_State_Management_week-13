@@ -40,6 +40,9 @@ class _StreamHomePageState extends State<StreamHomePage> {
   late NumberStream numberStream;
   late StreamTransformer transformer;//digunakan untuk mendeklarasikan variabel yang akan diinisialisasi sebelum digunakan.
   late StreamSubscription subscription;
+  late StreamSubscription subscription2;
+
+  String value = '';
 
   @override
   void initState() {
@@ -51,7 +54,14 @@ class _StreamHomePageState extends State<StreamHomePage> {
     //Membuat listener untuk stream 
     subscription = stream.listen((event) {
       setState(() {
-        lastNumber = event;
+        value += '$event - ';
+        //lastNumber = event;
+      });
+    });
+
+    subscription2 = stream.listen((event) {
+      setState(() {
+        value += '$event - ';
       });
     });
 
@@ -140,6 +150,7 @@ class _StreamHomePageState extends State<StreamHomePage> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            Text(value),
             Text(lastNumber.toString()),
             ElevatedButton(
               onPressed: () => addRandomNumber(),

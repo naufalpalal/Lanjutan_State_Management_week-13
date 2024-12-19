@@ -11,7 +11,14 @@
 
 # Capture Hasil Praktikum keempat (Menambah dan menghentikan subscription)
 ![Praktikum Menambah dan menghentikan subscription](Video-4.gif)
+![Consolenya](<Console 4.png>)
 
+# Soal 10
+Error itu bisa terjadi dikarena objek Stream hanya mendukung 1 subscription.
+
+
+# Capture Hasil Praktikum kesebelas (Menambahkan dua subscription)
+![Praktikum Menambahkan dua subscription](Video-5.gif)
 
 A new Flutter project.
 
